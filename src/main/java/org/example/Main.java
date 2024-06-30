@@ -4,7 +4,8 @@ public class Main {
     public static void main(String[] args) {
 //        RedisString.StringTest();
 //        ListAndSet.ListAndSetTest();
-        RedisHash.hashTest();
+//        RedisHash.hashTest();
+        SortedSet.test();
 
     }
 }

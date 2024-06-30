@@ -38,12 +38,12 @@ public class ListAndSet {
 //                queue1.forEach(System.out::println);
 
                 // 3. block brpop
-                while (true) {
-                    List<String> blpop = jedis.blpop(10, "queue:blocking");
-                    if (blpop != null) {
-                        blpop.forEach(System.out::println);
-                    }
-                }
+//                while (true) {
+//                    List<String> blpop = jedis.blpop(10, "queue:blocking");
+//                    if (blpop != null) {
+//                        blpop.forEach(System.out::println);
+//                    }
+//                }
 
                 // Set
                 jedis.sadd("users:500:follow", "100", "200", "300");
