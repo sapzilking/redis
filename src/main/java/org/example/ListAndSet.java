@@ -4,13 +4,15 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import java.util.List;
+import java.util.Set;
 
 public class ListAndSet {
 
     public static void ListAndSetTest() {
         try (var jedisPool = new JedisPool("127.0.0.1", 6379)) {
             try (Jedis jedis = jedisPool.getResource()) {
-                // list
+                // List
+
                 // 1. stack
                 jedis.rpush("stack1", "a");
                 jedis.rpush("stack1", "b");
@@ -42,6 +44,22 @@ public class ListAndSet {
                         blpop.forEach(System.out::println);
                     }
                 }
+
+                // Set
+                jedis.sadd("users:500:follow", "100", "200", "300");
+                jedis.srem("users:500:follow", "100");
+
+                Set<String> smembers = jedis.smembers("users:500:follow");
+                smembers.forEach(System.out::println);
+
+                System.out.println(jedis.sismember("users:500:follow", "200"));
+                System.out.println(jedis.sismember("users:500:follow", "210"));
+
+                System.out.println(jedis.scard("users:500:follow"));
+
+                jedis.sadd("users:600:follow", "200", "300", "400");
+                Set<String> sinter = jedis.sinter("users:500:follow", "users:600:follow");
+                sinter.forEach(System.out::println);
             }
         }
 
