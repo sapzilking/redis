@@ -5,7 +5,8 @@ public class Main {
 //        RedisString.StringTest();
 //        ListAndSet.ListAndSetTest();
 //        RedisHash.hashTest();
-        SortedSet.test();
+//        SortedSet.test();
+        RedisGeospatial.test();
 
     }
 }
