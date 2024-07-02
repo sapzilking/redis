@@ -1,4 +1,4 @@
-package org.example;
+package org.example.redisTest;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -62,7 +62,5 @@ public class ListAndSet {
                 sinter.forEach(System.out::println);
             }
         }
-
-
     }
 }
