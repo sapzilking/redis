@@ -5,11 +5,15 @@ import org.example.domain.entity.RedisHashUser;
 import org.example.domain.entity.User;
 import org.example.domain.repository.RedisHashUserRepository;
 import org.example.domain.repository.UserRepository;
+import org.hibernate.annotations.Cache;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+
+import static org.example.domain.config.CacheConfig.CACHE1;
 
 @RequiredArgsConstructor
 @Service
@@ -61,6 +65,11 @@ public class UserService {
                     .build());
         });
         return cachedUser;
+    }
+
+    @Cacheable(cacheNames = CACHE1, key = "'user:' + #id")
+    public User getUser3(final Long id) {
+        return userRepository.findById(id).orElseThrow();
     }
 
 }
